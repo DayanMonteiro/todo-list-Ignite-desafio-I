@@ -34,9 +34,6 @@ export function TaskList() {
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-
-      //mapear as tasks, pegar elas mapeada e verifica se a task.id é igual ao objeto ela retorna 
-      //a taks igual e add subscrevendo a taks pelo valor novo
       const newTasks = tasks.map(tasks => tasks.id === id ? {
         ...tasks,
         isComplete: !tasks.isComplete
@@ -46,10 +43,7 @@ export function TaskList() {
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
-
-    // uma variavel para filtrar todas as tasks e retornar menos a que tiver o id da exclusão 
     const filteredTasks = tasks.filter(tasks => tasks.id !== id);
-    // salva no state as alterações e retorna o filteredTaks que esta com o array atualizado com o item removido
     setTasks(filteredTasks)
   }
 
