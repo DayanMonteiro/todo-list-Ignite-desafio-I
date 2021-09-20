@@ -16,14 +16,41 @@ export function TaskList() {
 
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
+
+    // não deixa enviar uma task se estiver com o campo vazio
+    if(!newTaskTitle) return;
+    // cria a nova task com as informações
+    const newTask = {
+      // gera um id automático
+      id: Math.random(),
+      title: newTaskTitle,
+      isComplete: false
+    }
+    // o oldState captura as informações antigas dentro do array e o newTask cria a nova
+    setTasks(oldState => [...oldState, newTask])
+    // reseta o input do todo
+    setNewTaskTitle('');
   }
 
   function handleToggleTaskCompletion(id: number) {
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
-  }
+
+      //mapear as tasks, pegar elas mapeada e verifica se a task.id é igual ao objeto ela retorna 
+      //a taks igual e add subscrevendo a taks pelo valor novo
+      const newTasks = tasks.map(tasks => tasks.id === id ? {
+        ...tasks,
+        isComplete: !tasks.isComplete
+      } : tasks);
+      setTasks(newTasks)
+    }
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
+
+    // uma variavel para filtrar todas as tasks e retornar menos a que tiver o id da exclusão 
+    const filteredTasks = tasks.filter(tasks => tasks.id !== id);
+    // salva no state as alterações e retorna o filteredTaks que esta com o array atualizado com o item removido
+    setTasks(filteredTasks)
   }
 
   return (
